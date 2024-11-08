@@ -1,0 +1,30 @@
+// schema.prisma
+
+datasource db {
+  provider = "postgresql" // Change this based on your database (e.g., "mysql" or "sqlite")
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  username       String
+  phoneNumber    String   @unique
+  crops          String[] // Optional array of crop names
+
+  // Crop-related details
+  N              Float    // Nitrogen
+  P              Float    // Phosphorus
+  K              Float    // Potassium
+  temperature    Float
+  humidity       Float
+  ph             Float
+  durationMonths Float
+  rainfall       Float
+  city           String?
+  selectedcrop   String?
+  createdAt      DateTime @default(now())
+}
